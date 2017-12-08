@@ -25,10 +25,10 @@ centos:
 
 ## Example
 劫持前：
-* ![enter image description here](http://ww1.sinaimg.cn/bmiddle/69a9c739jw1eqgwvqxhhmj206207tdg5.jpg "Before")
+* ![enter image description here](https://github.com/spkettas/httpfake/blob/master/screenshot/hibefore.png "Before")
 
 劫持后：
-* ![enter image description here](http://ww1.sinaimg.cn/bmiddle/69a9c739jw1eqgwvqxhhmj206207tdg5.jpg "After")
+* ![enter image description here](hhttps://github.com/spkettas/httpfake/blob/master/screenshot/hiafter.png "After")
 
 ## At last
 更高效的采集方式，可考虑PF_RING，DPDK等零拷贝库。
