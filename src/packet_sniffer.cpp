@@ -1,4 +1,5 @@
 #include "packet_sniffer.h"
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <arpa/inet.h>

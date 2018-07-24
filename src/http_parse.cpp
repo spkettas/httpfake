@@ -451,7 +451,7 @@ URLDetail *HttpParse::FindUrl( char *url,int len,URLInfo *info )
     it = m_HashDomain.find( BKDRHashUsername(suffix) );
 
     if( it == m_HashDomain.end() )
-        return false;
+        return NULL;
 
     // ÎÞ½á¹ûÌî³ä
     URLDetail *pUrl = it->second;
