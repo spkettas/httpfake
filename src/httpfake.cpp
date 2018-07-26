@@ -57,8 +57,6 @@ HttpFake::~HttpFake()
 }
 
 
-//&&&
-#include "pcapop.h"
 bool HttpFake::sendHttpResponse( char *buff, char *response )
 {
     struct iphdr *ip = (struct iphdr*)buff;
@@ -127,29 +125,6 @@ bool HttpFake::sendHttpResponse( char *buff, char *response )
                         0,
                         (struct sockaddr *)&m_addr,
                         sizeof(struct sockaddr_in) );
-    //&&&
-    {
-        printf( "%d %d\n",ntohs(pTempTcp->source), count );
-        char *buf = new char[ nLen + 14 ];
-        memcpy( (void*)(buf + 14),(void*)pTempIP,nLen );
-
-        struct ethhdr *eth = (struct ethhdr *)buf;
-        eth->h_proto = htons(ETHERTYPE_IP);
-        eth->h_source[0] = 0x1c;
-        eth->h_source[1] = 0xfa;
-        eth->h_source[2] = 0x68;
-        eth->h_source[3] = 0x46;
-        eth->h_source[4] = 0xd3;
-        eth->h_source[5] = 0x38;
-        eth->h_dest[0] = 0x60;
-        eth->h_dest[1] = 0xa4;
-        eth->h_dest[2] = 0x4c;
-        eth->h_dest[3] = 0xb3;
-        eth->h_dest[4] = 0xd8;
-        eth->h_dest[5] = 0x38;
-        AppendPkt( "fake.cap", 3, buf, nLen + 14 );
-        delete buf;
-    }
 
     return count > 0;
 }
@@ -194,10 +169,6 @@ unsigned short CheckSum(unsigned short* buffer, int size)
 // IP¼ìÑéºÍ
 int IPCheckSum( iphdr* ip )
 {
-    assert( NULL != ip );
-    assert( ip->version == 4 );
-    assert( ip->ihl >= 5 );
-
     if( NULL==ip || 4 != ip->version || 5 > ip->ihl )
     {
         return -1;
