@@ -28,9 +28,9 @@
 #endif
 
 
-// ½Ù³ÖÏìÓ¦
+// ï¿½Ù³ï¿½ï¿½ï¿½Ó¦
 static char *g_Response = "<html>"
-                          "<head><title>À¹½Ø²âÊÔ</title></head>"
+                          "<head><title>ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½</title></head>"
                           "<body><h1>You web is hijacked, Haha</h1></body>"
                           "</html>";
 
@@ -79,7 +79,7 @@ void PacketSniffer::Start( char *eth, int type, char *ip )
 {
     inet_pton( AF_INET, ip, &m_PreventIp );
 
-    // ²É¼¯ÀàÐÍ
+    // ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½
     if( type == 1 )
     {
         printf( "Enable raw socket\n" );
@@ -136,7 +136,7 @@ void PacketSniffer::HandleFrame( char *pdata )
     }
 
     /// tcp
-    tcp = (struct tcphdr*)((char*)iphead + sizeof(struct ip));
+    tcp = (struct tcphdr*) ((char*) iphead + iphead->ihl * 4);
     if( NULL == tcp )
     {
         return;
@@ -157,27 +157,27 @@ void PacketSniffer::HandleFrame( char *pdata )
 
     Data = (char*)tcp + sizeof(struct tcphdr);
 
-    /// GETÇëÇó
+    /// GETï¿½ï¿½ï¿½ï¿½
     if( ntohl(*(unsigned int*)Data) != VALUE_GET)
     {
         return;
     }
 
-    // ½âÎöÖ÷ÓòÃû
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     if( !mParser->parseHttp(Data,Length,&host) )
     {
         return;
     }
 
-    /// ±ãÓÚÑÝÊ¾£¬Ö»À¹½ØÖ¸¶¨IPÇÒÖ÷ÓòÃûÎª*.htmµÄÇëÇó
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½IPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª*.htmï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     if( iphead->saddr == m_PreventIp )
     {
         printf( "IP:%u %s/%s plen:%d\n",iphead->saddr,host.host,host.path, host.plen );
 
-        /// ½öÀ¹½Øpath³¤¶ÈÎª25µÄÇëÇó
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pathï¿½ï¿½ï¿½ï¿½Îª25ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if( host.plen == 25 )
         {
-            // Î±ÔìÏìÓ¦
+            // Î±ï¿½ï¿½ï¿½ï¿½Ó¦
             mFaker->sendHttpResponse( (char*)iphead, g_Response );
         }
     }
@@ -207,7 +207,7 @@ void PacketSniffer::RawSniffer( const char *ethn )
         bzero( buffer, BUF_LEN );
         n = recvfrom( sock, buffer, BUF_LEN, 0, NULL, NULL );
 
-        // »Øµ÷´¦Àí
+        // ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
         this->HandleFrame( buffer );
     }
 
@@ -218,7 +218,7 @@ void PacketSniffer::RawSniffer( const char *ethn )
 
 #ifdef _ENABLE_PCAP
 
-// Libpcap»Øµ÷º¯Êý
+// Libpcapï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
 void GetPacket( u_char *arg, const struct pcap_pkthdr*, const u_char *packet )
 {
     PacketSniffer *pSniffer = (PacketSniffer*)arg;
