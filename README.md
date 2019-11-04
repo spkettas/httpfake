@@ -1,5 +1,4 @@
 # httpfake
----
 
 Httpfake is a program that demnostrate how to hijack http package and response a advertisement to browser.
 httpfake 演示http数据协议过程，涉及到数据包采集，tcp协议包构造等技术点。
@@ -24,11 +23,11 @@ centos:
     ./httpfake eth0 1 10.14.230.9
 
 ## Example
-劫持前：
-* ![enter image description here](https://github.com/spkettas/httpfake/blob/master/screenshot/hibefore.png "Before")
+* 劫持前：
+![劫持前](https://github.com/spkettas/httpfake/blob/master/screenshot/hibefore.png "Before")
 
-劫持后：
-* ![enter image description here](https://github.com/spkettas/httpfake/blob/master/screenshot/hiafter.png "After")
+* 劫持后：
+![劫持后](https://github.com/spkettas/httpfake/blob/master/screenshot/hiafter.png "After")
 
 ## At last
 更高效的采集方式，可考虑PF_RING，DPDK等零拷贝库。
